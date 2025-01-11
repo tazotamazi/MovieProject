@@ -5,7 +5,7 @@ export default function Navbar() {
         <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
             <h1 className="text-lg font-bold">MovieHub</h1>
             <div className="flex gap-4">
-                <Link href="/" className="hover:underline">
+                <Link href="/index" className="hover:underline">
                     Home
                 </Link>
                 <Link href="/search" className="hover:underline">

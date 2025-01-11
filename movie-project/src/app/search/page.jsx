@@ -1,19 +1,21 @@
 "use client";
 
+// /pages/search.jsx
+
 import { useState } from "react";
 import SearchBar from "../components/SearchBar.";
 import MovieCard from "../components/MovieCard.";
 import { searchMovies } from "../utils/api";
 
 export default function Search() {
-    const [movies, setMovies] = useState([]); // State to store the movies
+    const [movies, setMovies] = useState([]);
 
     const handleSearch = (query) => {
-        if (query.trim() === "") return; // Skip empty search
+        if (query.trim() === "") return;
 
-        searchMovies(query).then((data) => {
-            setMovies(data.Search || []); // Update the movie results (data.Search may vary based on the API response)
-        });
+        searchMovies(query)
+            .then((data) => setMovies(data.Search || [])) // Ensure we are accessing the correct property
+            .catch((error) => console.error("Error fetching data:", error));
     };
 
     return (

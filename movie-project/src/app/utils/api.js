@@ -1,16 +1,25 @@
-// /utils/api.js
 import axios from "axios";
-
-const API_KEY = "your_api_key"; // Replace with your actual API key (e.g., from OMDB)
 
 export const searchMovies = async (query) => {
     try {
-        const response = await axios.get(
-            `https://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`
-        );
-        return response.data; // Ensure that response contains 'results' or the data structure you expect
+        // Log the query to check if it's correct
+        console.log("Searching for:", query);
+
+        // Make the API call
+        const res = await axios.get("http://www.omdbapi.com/", {
+            params: {
+                s: query, // Search query (e.g., "Inception")
+                apikey: process.env.NEXT_PUBLIC_OMDB_API_KEY,
+            },
+        });
+
+        // Log the API response
+        console.log("API Response:", res.data);
+
+        // Return the data
+        return res.data;
     } catch (error) {
-        console.error("Error fetching movie data:", error);
-        return { results: [] }; // Return empty results in case of error
+        console.error("Error fetching movies:", error);
+        throw error;
     }
 };
