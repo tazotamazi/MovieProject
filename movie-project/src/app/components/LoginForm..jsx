@@ -22,7 +22,7 @@ export default function LoginForm() {
             console.log("Login successful, token:", data.token);
 
             // Redirect to home page or a dashboard
-            window.location.href = "/";
+            window.location.href = "/index";
         } catch (err) {
             setError(err.message || "Something went wrong");
         } finally {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard.";
 import { searchMovies } from "../utils/api"; // Import the function to fetch movies
+import MovieCarousel from "../components/MovieCarousel";
 
 export default function Home() {
     const [movies, setMovies] = useState([]);
@@ -25,6 +26,10 @@ export default function Home() {
 
     return (
         <div className="p-4">
+            {/* Add MovieCarousel */}
+            <MovieCarousel movies={movies} />
+
+            {/* Existing Movie Grid */}
             <h1 className="text-2xl font-bold mb-4">Popular Movies</h1>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {movies.map((movie) => (
