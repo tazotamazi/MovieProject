@@ -1,16 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "@/context";
+import { useTheme } from "@/app/context";
 
 export default function Navbar() {
-    const { darkMode, toggleDarkMode } = useTheme(); // Access dark mode and toggle function
+    const { theme, toggleTheme } = useTheme();
 
     return (
-        <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
+        <nav
+            className={`p-4 flex justify-between items-center transition-all duration-300 
+            ${theme === "light" ? "bg-white text-black shadow-md" : "bg-gray-900 text-white shadow-xl"}`}
+        >
             <h1 className="text-lg font-bold">MovieHub</h1>
-            <div className="flex items-center gap-4">
-                {/* Navigation Links */}
+            <div className="flex gap-4">
                 <Link href="/index" className="hover:underline">
                     Home
                 </Link>
@@ -20,16 +22,21 @@ export default function Navbar() {
                 <Link href="/login" className="hover:underline">
                     Login
                 </Link>
-
-                {/* Dark Mode Toggle */}
-                <button
-                    onClick={toggleDarkMode}
-                    className="p-2 bg-gray-700 rounded hover:bg-gray-600"
-                    aria-label="Toggle Dark Mode"
-                >
-                    {darkMode ? "☀️ Light" : "🌙 Dark"}
-                </button>
             </div>
+            <button
+                onClick={toggleTheme}
+                className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-all"
+            >
+                {theme === "light" ? (
+                    <span role="img" aria-label="moon">
+                        🌙
+                    </span>
+                ) : (
+                    <span role="img" aria-label="sun">
+                        ☀️
+                    </span>
+                )}
+            </button>
         </nav>
     );
 }

@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { loginUser } from "../utils/auth"; // Ensure this path is correct
+import { useTheme } from "../context";
 
 export default function LoginForm() {
+    const { theme } = useTheme(); // Access the current theme
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -33,7 +35,8 @@ export default function LoginForm() {
     return (
         <form
             onSubmit={handleLogin}
-            className="p-6 bg-white rounded-lg shadow-lg"
+            className={`p-6 rounded-lg shadow-lg transition-all duration-300
+            ${theme === "light" ? "bg-white text-black" : "bg-gray-800 text-white"}`}
         >
             <h1 className="text-xl font-bold mb-4">Login</h1>
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
@@ -42,14 +45,16 @@ export default function LoginForm() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border p-2 w-full mb-4"
+                className={`border p-2 w-full mb-4 
+                ${theme === "light" ? "bg-white" : "bg-gray-700"}`}
             />
             <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border p-2 w-full mb-4"
+                className={`border p-2 w-full mb-4 
+                ${theme === "light" ? "bg-white" : "bg-gray-700"}`}
             />
             <button
                 type="submit"
