@@ -1,7 +1,7 @@
 // /components/MovieCard.jsx
 export default function MovieCard({ movie }) {
     return (
-        <div className="border p-4 rounded">
+        <div className="border p-4 rounded transition-transform transform hover:scale-105 hover:shadow-lg">
             <img
                 src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.jpg"} // Use placeholder image if no poster
                 alt={movie.Title}
